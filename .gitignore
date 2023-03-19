@@ -1,0 +1,8 @@
+build/
+Core/
+Drivers/
+.mxproject
+*.ioc
+Makefile
+*.s
+*.ld

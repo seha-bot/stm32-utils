@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/arm-none-eabi/**",
+                "/lib/gcc/arm-none-eabi/**"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32F103x6"
+            ],
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
