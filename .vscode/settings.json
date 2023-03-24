@@ -6,5 +6,16 @@
         "master.h": "c",
         "stime.h": "c",
         "lcd.h": "c",
+        "keypad.h": "c",
+        "array": "c",
+        "compare": "c",
+        "functional": "c",
+        "ratio": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "stdio.h": "c"
     }
 }

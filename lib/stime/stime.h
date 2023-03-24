@@ -5,6 +5,6 @@
 #include<time.h>
 
 extern RTC_HandleTypeDef* stime_hrtc;
-time_t get_time(void);
+time_t stime(void);
 
 #endif /* STM_UTILS_STIME */

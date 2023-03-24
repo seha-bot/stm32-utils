@@ -2,7 +2,7 @@
 
 RTC_HandleTypeDef* stime_hrtc = 0;
 
-time_t get_time(void)
+time_t stime(void)
 {
     RTC_TimeTypeDef sTime;
     RTC_DateTypeDef sDate;
