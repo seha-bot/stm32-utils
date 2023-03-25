@@ -28,7 +28,6 @@ void print_mode()
 
 void start(void)
 {
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, 1);
     lcd_init();
     lcd_display_control(1, 1, 0);
     print_mode();
