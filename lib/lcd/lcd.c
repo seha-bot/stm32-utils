@@ -44,7 +44,7 @@ void lcd_set_cursor(uint8_t x, uint8_t y)
 void lcd_clear(void)
 {
     lcd_instruction(0b00000001);
-    sleep_ms(1);
+    sleep_ms(2);
 }
 
 void lcd_home(void)

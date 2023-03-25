@@ -3,7 +3,7 @@
 
 #include "main.h"
 #include "sleep.h"
-// #include "stime.h"
+#include "stime.h"
 #include "lcd.h"
 #include "keypad.h"
 
