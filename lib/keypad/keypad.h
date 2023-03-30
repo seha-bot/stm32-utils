@@ -18,7 +18,7 @@ typedef struct
 /*
 NOTE:
     The pins along the width (A0, A1 in the example) must be set to output
-    and the pins along the height must be set to input
+    and the pins along the height must be set to input (pull down)
 EXAMPLE:
     keypad handler = keypad_init(2, 3,
         GPIOA, GPIO_PIN_0, GPIOA, GPIO_PIN_1,

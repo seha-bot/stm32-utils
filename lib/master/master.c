@@ -28,6 +28,7 @@ void print_mode()
 
 void start(void)
 {
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
     lcd_init();
     lcd_display_control(1, 1, 0);
     print_mode();
@@ -55,6 +56,7 @@ void loop(void)
         if(timer - stime() <= 0)
         {
             lcd_display_control(1, 1, 0);
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
             mode = 1;
         }
         print_mode();
@@ -113,6 +115,7 @@ void loop(void)
             lcd_clear();
             lcd_display_control(1, 0, 0);
             lcd_letters("UNLOCKED ");
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
         }
         print_mode();
         return;
