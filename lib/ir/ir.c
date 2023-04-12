@@ -1,6 +1,6 @@
 #include "ir.h"
 
-uint64_t get_ir(void)
+uint64_t ir_get(void)
 {
     if(!HAL_GPIO_ReadPin(IR))
     {

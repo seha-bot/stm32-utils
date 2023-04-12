@@ -4,7 +4,9 @@
 #include "main.h"
 #include<time.h>
 
+#ifdef RTC_FORMAT_BIN
 extern RTC_HandleTypeDef* stime_hrtc;
-time_t get_time(void);
+#endif /* RTC_FORMAT_BIN */
+time_t stime(void);
 
 #endif /* STM_UTILS_STIME */
