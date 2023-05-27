@@ -46,6 +46,8 @@ void unlock(void)
     mode = MODE_UNLOCKED;
     lcd_display_control(1, 0, 0);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+    sleep_ms(50);
+    lcd_clear();
     timer = stime() + 9;
 }
 
@@ -87,7 +89,7 @@ void loop(void)
     {
         if(timer - stime() <= 0) lock();
         print_mode();
-        sleep_ms(500);
+        sleep_ms(900);
         return;
     }
 
