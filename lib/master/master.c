@@ -38,14 +38,14 @@ void lock(void)
 {
     mode = MODE_LOCKED;
     lcd_display_control(1, 1, 0);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, 0);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
 }
 
 void unlock(void)
 {
     mode = MODE_UNLOCKED;
     lcd_display_control(1, 0, 0);
-    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, 1);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
     timer = stime() + 9;
 }
 
