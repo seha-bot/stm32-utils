@@ -23,13 +23,13 @@
 #include "main.h"
 #include "sleep.h"
 
-#define LCD_RS GPIOA, GPIO_PIN_0
-#define LCD_E  GPIOA, GPIO_PIN_1
+#define LCD_RS GPIOA, GPIO_PIN_5
+#define LCD_E  GPIOA, GPIO_PIN_4
 
-#define LCD_D4 GPIOA, GPIO_PIN_2
-#define LCD_D5 GPIOA, GPIO_PIN_3
-#define LCD_D6 GPIOA, GPIO_PIN_4
-#define LCD_D7 GPIOA, GPIO_PIN_5
+#define LCD_D4 GPIOA, GPIO_PIN_3
+#define LCD_D5 GPIOA, GPIO_PIN_2
+#define LCD_D6 GPIOA, GPIO_PIN_1
+#define LCD_D7 GPIOA, GPIO_PIN_0
 
 // DISPLAY INSTRUCTIONS
 void lcd_set_data(uint8_t RS, uint8_t data);

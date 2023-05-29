@@ -50,7 +50,8 @@ do
     rm temp
 done
 
-NAME=$(pwd | grep -o "[^\/]*$")
+NAME=$(echo *.ioc)
+NAME=$(echo "${NAME%.*}")
 if make; then
     st-flash --reset write build/$NAME.bin 0x08000000
 fi
