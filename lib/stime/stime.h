@@ -8,5 +8,6 @@
 extern RTC_HandleTypeDef* stime_hrtc;
 #endif /* RTC_FORMAT_BIN */
 time_t stime(void);
+void stime_adjust_host(void);
 
 #endif /* STM_UTILS_STIME */

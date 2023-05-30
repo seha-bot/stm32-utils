@@ -20,6 +20,20 @@ void HAL_RTC_GetDate(RTC_HandleTypeDef* hrtc, RTC_DateTypeDef* date, int _)
 
 RTC_HandleTypeDef* stime_hrtc = 0;
 
+void stime_adjust_host(void)
+{
+    RTC_TimeTypeDef sTime;
+    RTC_DateTypeDef sDate;
+
+    sTime.Hours = sTime.Minutes = sTime.Seconds = 0;
+    sDate.Year = 0;
+    sDate.Month = 1;
+    sDate.Date = 1;
+
+    HAL_RTC_SetTime(stime_hrtc, &sTime, RTC_FORMAT_BIN);
+    HAL_RTC_SetDate(stime_hrtc, &sDate, RTC_FORMAT_BIN);
+}
+
 time_t stime(void)
 {
     RTC_TimeTypeDef sTime;
@@ -37,7 +51,13 @@ time_t stime(void)
     t.tm_year = sDate.Year;
     t.tm_mon = sDate.Month;
     t.tm_mday = sDate.Date;
-    t.tm_wday = sDate.WeekDay;
+
+    t.tm_year = 70;
+    t.tm_mon = 0;
+    // t.tm_mday = 1;
 
     return mktime(&t);
 }
+
+// Current design: lock will only work for 30 days :P
+

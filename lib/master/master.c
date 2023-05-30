@@ -1,7 +1,8 @@
 // This is the worst code I've written in my life
 #include "master.h"
-#include<stdio.h>
-#include<time.h>
+#include "rtc.h"
+#include <stdio.h>
+#include <time.h>
 
 #define KEY_CLEAR 11
 #define KEY_OK 9
@@ -15,12 +16,10 @@ int blen = 0;
 char map[12] = { '3','2','1','6','5','4','9','8','7',0,'0',0 };
 int is_down[12] = { [0 ... 11] = 0 };
 uint64_t seed = 0;
-time_t offset = 0;
 time_t timer = 0;
 int mode = MODE_SEED;
 
 // TODO: extract to flash-utils and make a proper manager.
-#define FLASH_OFFSET_ADDR ((uint32_t)0x08007FF4)
 #define FLASH_SEED_ADDR ((uint32_t)0x08007FF0)
 
 // Warning: can corrupt all data :)
@@ -43,19 +42,9 @@ void writeDataToFlash(uint32_t data, uint32_t addr)
     HAL_FLASH_Lock();
 }
 
-void writeOffset()
-{
-    writeDataToFlash(offset, FLASH_OFFSET_ADDR);
-}
-
 void writeSeed()
 {
     writeDataToFlash(seed, FLASH_SEED_ADDR);
-}
-
-uint32_t readOffset()
-{
-    return *(uint32_t*)FLASH_OFFSET_ADDR;
 }
 
 uint32_t readSeed()
@@ -66,7 +55,6 @@ uint32_t readSeed()
 void conditionalReadIfSet()
 {
     if(readSeed() == 0xFFFFFFFF) return;
-    offset = readOffset();
     seed = readSeed();
     mode = MODE_LOCKED;
 }
@@ -123,7 +111,7 @@ uint16_t hash_rand(uint32_t seed)
 
 uint16_t get_pass(void)
 {
-    uint16_t pass = hash_rand((stime() - offset + seed) / 60);
+    uint16_t pass = hash_rand((stime() + seed) / 60);
     for(uint8_t i = 0; i <= 12; i += 4)
     {
         pass = (pass & ~(0xf << i)) | ((pass >> i & 0xf) % 10 << i);
@@ -137,6 +125,8 @@ void start(void)
     lcd_display_control(1, 1, 0);
     conditionalReadIfSet();
     print_mode();
+
+    HAL_RTC_MspInit(&hrtc);
 
     keypad_handler = keypad_init(3, 4,
         GPIOB, GPIO_PIN_12, GPIOB, GPIO_PIN_13, GPIOB, GPIO_PIN_14,
@@ -174,11 +164,10 @@ void loop(void)
         if(mode == MODE_SEED)
         {
             mode = MODE_LOCKED;
-            offset = stime();
+            stime_adjust_host();
             seed = atoi(buffer);
             unsafeEraseLastSector();
             writeSeed();
-            writeOffset();
             print_mode();
             return;
         }
